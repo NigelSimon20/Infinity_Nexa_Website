@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Calculator, Code2 } from "lucide-react";
-import { Section, SectionHeading, Button } from "@/components/ui";
-import Reveal from "@/components/Reveal";
-import ServiceCard from "@/components/ServiceCard";
+import { Section, Button } from "@/components/ui";
 import PageHero from "@/components/PageHero";
-import { pillars } from "@/lib/data";
+import ServicesExplorer from "@/components/ServicesExplorer";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -22,58 +19,10 @@ export default function ServicesPage() {
         breadcrumb="Services"
       />
 
-      {/* Pillar quick-nav */}
-      <div className="sticky top-16 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-3 overflow-x-auto px-4 py-3 sm:px-6 lg:px-8">
-          <a
-            href="#finance"
-            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-100"
-          >
-            <Calculator className="h-4 w-4" /> Finance &amp; Compliance
-          </a>
-          <a
-            href="#it"
-            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-100"
-          >
-            <Code2 className="h-4 w-4" /> IT &amp; Digital
-          </a>
-        </div>
-      </div>
-
-      {pillars.map((p) => {
-        const isFinance = p.id === "finance";
-        const Icon = isFinance ? Calculator : Code2;
-        return (
-          <Section
-            key={p.id}
-            id={p.id}
-            className={isFinance ? "scroll-mt-28 bg-white" : "scroll-mt-28 bg-slate-50"}
-          >
-            <div className="flex items-start gap-4">
-              <span
-                className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-white shadow-soft ${
-                  isFinance ? "bg-emerald-600" : "bg-brand-600"
-                }`}
-              >
-                <Icon className="h-7 w-7" strokeWidth={1.75} />
-              </span>
-              <SectionHeading
-                eyebrow={`Pillar ${p.letter}`}
-                title={p.title}
-                intro={p.blurb}
-              />
-            </div>
-
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {p.services.map((s, i) => (
-                <Reveal key={s.name} delay={(i % 3) * 80}>
-                  <ServiceCard service={s} accent={isFinance ? "finance" : "brand"} />
-                </Reveal>
-              ))}
-            </div>
-          </Section>
-        );
-      })}
+      {/* Tabbed pillar explorer */}
+      <Section className="scroll-mt-24 bg-slate-50">
+        <ServicesExplorer />
+      </Section>
 
       {/* CTA */}
       <Section className="bg-white">
