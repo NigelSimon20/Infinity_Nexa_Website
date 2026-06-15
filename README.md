@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Infinity Nexa — Business & IT Services Website
 
-## Getting Started
+A multi-page corporate website for **Infinity Nexa Business & IT Services (Pvt) Ltd**,
+combining the strongest sections of the three TopTech demo templates into one cohesive
+site. Built with **Next.js 16 (App Router) + TypeScript + Tailwind CSS v4**.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # start dev server → http://localhost:3000
+npm run build    # production build
+npm run start    # serve the production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route        | Contents |
+|--------------|----------|
+| `/`          | Hero, two pillars, popular services, why-us, stats, 5-step process, FAQ |
+| `/services`  | Full catalogue — Pillar A (Finance/ZIMRA) + Pillar B (IT/Digital) with USD pricing |
+| `/packages`  | The 4 retainer packages, payment & terms, FAQ |
+| `/about`     | Who we are, values, the 6 directors, why choose us |
+| `/contact`   | Contact form, details, office hours, next-steps |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Where everything lives
 
-## Learn More
+- **All text, services, prices, team, packages, FAQs:** `src/lib/data.ts`
+  — edit this one file to update content site-wide.
+- **Brand colours & fonts:** `src/app/globals.css` (`@theme` block).
+- **Components:** `src/components/` (Header, Footer, Logo, ServiceCard, etc.).
 
-To learn more about Next.js, take a look at the following resources:
+## ⚠️ Placeholders to update before going live
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Your real logo** — the mark is currently a clean SVG recreation in
+   `src/components/Logo.tsx`. To use your PNG instead: drop it in `public/logo.png`
+   and replace `<InfinityMark .../>` with
+   `<Image src="/logo.png" alt="Infinity Nexa" width={140} height={40} />`.
+2. **WhatsApp number** — `company.whatsapp` in `src/lib/data.ts` (currently a placeholder).
+3. **Social media links** — the `href="#"` links in `src/components/Footer.tsx`.
+4. **Contact form backend** — the form in `src/components/ContactForm.tsx` currently
+   opens the visitor's email client (mailto). For real form submissions, wire it to a
+   service like Formspree, Resend, or a Next.js API route (see the comment in that file).
+5. **Equity percentages** were intentionally **left off** the public site — they're
+   internal info. The team is shown by role/pillar only.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
+This is a fully static-prerendered Next.js app. Easiest hosts:
+- **Vercel** — `vercel` (zero config), or connect the Git repo.
+- **Netlify** — connect repo, build command `npm run build`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Where Business Meets Technology — Harare, Zimbabwe.*

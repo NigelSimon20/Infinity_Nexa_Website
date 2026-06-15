@@ -1,26 +1,139 @@
 @import "tailwindcss";
+/* Chillax (display font) is loaded via a <link> in layout.tsx */
+
+/* ============================================================
+   Infinity Nexa — Design Tokens
+   Fonts: Chillax (display) / Avenir Next (body, system + web fallback)
+   Restrained palette — solid corporate blue, gradients kept minimal.
+   ============================================================ */
+
+@theme {
+  --font-sans: "Avenir Next", "Avenir", var(--font-fallback), system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Chillax", var(--font-fallback), ui-sans-serif, system-ui,
+    sans-serif;
+
+  /* Brand palette */
+  --color-ink: #0a1733;
+  --color-navy: #0f1f47;
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #1e40af;
+  --color-brand-700: #1b3a96;
+  --color-sky: #38bdf8;
+  --color-finance: #059669;
+
+  --shadow-soft: 0 1px 2px rgba(15, 31, 71, 0.04), 0 8px 24px rgba(15, 31, 71, 0.06);
+  --shadow-card: 0 1px 3px rgba(15, 31, 71, 0.06), 0 16px 40px rgba(15, 31, 71, 0.1);
+}
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Minimal brand utilities ---------- */
+
+/* One restrained gradient, reserved for the logo backdrop / rare accents */
+.brand-gradient {
+  background-image: linear-gradient(120deg, #1e40af 0%, #2563eb 100%);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Subtle dark hero: mostly a fine grid + one faint glow */
+.hero-grid {
+  background-image:
+    radial-gradient(60% 60% at 75% 0%, rgba(56, 189, 248, 0.1), transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 46px 46px, 46px 46px;
+}
+
+/* ---------- Animations (demo-02 style) ---------- */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-16px) rotate(2deg); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); }
+  70%  { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 26s linear infinite; }
+.animate-pulse-ring { animation: pulse-ring 2.4s ease-out infinite; }
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Stagger helpers */
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
+.delay-5 { animation-delay: 0.40s; }
+
+/* Focus visibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
