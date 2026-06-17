@@ -89,7 +89,7 @@ export const pillars: Pillar[] = [
       { name: "ZIMRA ITF12B Annual", description: "Corporate income tax return", prices: { bronze: "$60", silver: "$100", premium: "$180" } },
       { name: "ZIMRA Objections", description: "Drafting objections and correspondence", prices: { bronze: "$40", silver: "$70", premium: "$130" } },
       { name: "ZIMRA Tax Health Check", description: "Full compliance review and risk identification", prices: { bronze: "$60", silver: "$110", premium: "$200" } },
-      { name: "TARNS Assistance", description: "TARNS registration and compliance support", prices: { bronze: "$20", silver: "$35", premium: "$60" } },
+      { name: "TARMS Assistance", description: "TARMS registration and compliance support", prices: { bronze: "$20", silver: "$35", premium: "$60" } },
       { name: "Sage Pastel Setup", description: "Installation, config, chart of accounts, training", prices: { bronze: "$60", silver: "$110", premium: "$200" } },
       { name: "Sage X3 Guidance", description: "Module config, workflow setup, user training", prices: { bronze: "-", silver: "$150", premium: "$350" } },
       { name: "Tender Writing", description: "Full tender preparation and submission support", prices: { bronze: "$50", silver: "$90", premium: "$160" } },
