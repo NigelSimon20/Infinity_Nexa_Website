@@ -69,7 +69,7 @@ export default function AboutPage() {
               {[
                 { v: 6, s: "", l: "Directors" },
                 { v: 2, s: "", l: "Pillars" },
-                { v: 32, s: "+", l: "Services" },
+                { v: 40, s: "+", l: "Services" },
               ].map((x) => (
                 <div key={x.l}>
                   <div className="font-display text-3xl font-bold text-brand-600">

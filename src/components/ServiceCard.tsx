@@ -31,9 +31,17 @@ import {
   Cctv,
   Cloud,
   Lock,
+  Store,
+  LayoutGrid,
+  Server,
+  Archive,
+  Search,
+  Share2,
+  QrCode,
+  GraduationCap,
   type LucideIcon,
 } from "lucide-react";
-import type { Service } from "@/lib/data";
+import type { Service, Tier } from "@/lib/data";
 
 const iconMap: Record<string, LucideIcon> = {
   "CV & Cover Letter Writing": FileText,
@@ -68,6 +76,14 @@ const iconMap: Record<string, LucideIcon> = {
   "CCTV Installation": Cctv,
   "Cloud Migration": Cloud,
   "Cybersecurity Assessment": Lock,
+  "POS System Setup": Store,
+  "Microsoft 365 / Google Workspace": LayoutGrid,
+  "Server Setup & Maintenance": Server,
+  "Data Backup & Recovery": Archive,
+  "SEO & Online Visibility": Search,
+  "Social Media Management": Share2,
+  "QR Code Menus & Catalogues": QrCode,
+  "IT Staff Training": GraduationCap,
 };
 
 const ACCENTS = {
@@ -88,12 +104,19 @@ const ACCENTS = {
 export default function ServiceCard({
   service,
   accent = "brand",
+  tier = "bronze",
+  priceLabel = "From",
 }: {
   service: Service;
   accent?: keyof typeof ACCENTS;
+  tier?: Tier;
+  priceLabel?: string;
 }) {
   const Icon = iconMap[service.name] ?? Sparkles;
   const a = ACCENTS[accent];
+  const raw = service.prices[tier];
+  const available = raw !== "-";
+  const price = available ? raw : "On request";
 
   return (
     <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-card">
@@ -113,10 +136,14 @@ export default function ServiceCard({
       </p>
       <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
         <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
-          From
+          {available ? priceLabel : "Available"}
         </span>
-        <span className={`font-display text-sm font-bold ${a.price}`}>
-          {service.price}
+        <span
+          className={`font-display text-sm font-bold ${
+            available ? a.price : "text-slate-400"
+          }`}
+        >
+          {price}
         </span>
       </div>
     </div>

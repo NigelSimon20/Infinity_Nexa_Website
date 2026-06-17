@@ -5,12 +5,12 @@ import { Section, SectionHeading, Button, Eyebrow } from "@/components/ui";
 import Reveal from "@/components/Reveal";
 import PageHero from "@/components/PageHero";
 import FaqAccordion from "@/components/FaqAccordion";
-import { packages, payment, faqs } from "@/lib/data";
+import { packages, payment, faqs, tierMeta, tierOrder } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Retainer Packages",
   description:
-    "Affordable monthly retainer packages bundling ZIMRA compliance, bookkeeping, payroll, website maintenance and design — from $120/mo.",
+    "Affordable monthly retainer packages bundling ZIMRA compliance, bookkeeping, payroll, website maintenance and design — from $55/mo, tiered by company size.",
 };
 
 const methodIcons = [Banknote, Smartphone, CreditCard];
@@ -62,6 +62,15 @@ export default function PackagesPage() {
                   </p>
 
                   <div className="mt-5 flex items-end gap-1">
+                    {pkg.from && (
+                      <span
+                        className={`mb-1.5 mr-0.5 text-xs font-semibold uppercase tracking-wide ${
+                          pkg.highlight ? "text-slate-400" : "text-slate-500"
+                        }`}
+                      >
+                        from
+                      </span>
+                    )}
                     <span
                       className={`font-display text-4xl font-extrabold ${
                         pkg.highlight ? "text-sky" : "text-slate-900"
@@ -77,6 +86,16 @@ export default function PackagesPage() {
                       {pkg.period}
                     </span>
                   </div>
+
+                  <span
+                    className={`mt-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+                      pkg.highlight
+                        ? "bg-white/10 text-slate-200"
+                        : "bg-slate-100 text-slate-600"
+                    }`}
+                  >
+                    {pkg.size}
+                  </span>
 
                   <Link
                     href="/contact"
@@ -120,6 +139,43 @@ export default function PackagesPage() {
           </Link>
           .
         </p>
+      </Section>
+
+      {/* Tier definitions */}
+      <Section className="bg-white">
+        <SectionHeading
+          center
+          eyebrow="Pricing Tiers"
+          title="Priced to match your business size"
+          intro="Every service and package is tiered, so you only pay for what fits your stage of growth."
+        />
+        <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-3">
+          {tierOrder.map((t, i) => {
+            const meta = tierMeta[t];
+            const badge = [
+              "bg-amber-50 text-amber-700",
+              "bg-slate-100 text-slate-700",
+              "bg-brand-50 text-brand-700",
+            ][i];
+            return (
+              <Reveal key={t} delay={i * 90}>
+                <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 shadow-soft">
+                  <span
+                    className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${badge}`}
+                  >
+                    {meta.name}
+                  </span>
+                  <h3 className="mt-4 font-display text-lg font-bold text-slate-900">
+                    {meta.size}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    {meta.profile}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
       </Section>
 
       {/* Payment & terms */}

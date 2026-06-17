@@ -15,7 +15,7 @@ export default function ServicesPage() {
       <PageHero
         eyebrow="Our Services"
         title="Everything your business needs, transparently priced."
-        intro="Two pillars, 30+ services, one trusted partner. Every price below is a real starting range in USD — no surprises, no hidden fees."
+        intro="Two pillars, 40+ services, one trusted partner. Pick your business size to see Bronze, Silver or Premium pricing — all in USD, no hidden fees."
         breadcrumb="Services"
       />
 

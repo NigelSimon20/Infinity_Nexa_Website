@@ -277,7 +277,7 @@ export default function Home() {
         <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
           {[
             { icon: Users, value: 6, suffix: "", label: "Expert directors across both pillars" },
-            { icon: BadgeDollarSign, value: 32, suffix: "+", label: "Affordable services in USD" },
+            { icon: BadgeDollarSign, value: 40, suffix: "+", label: "Services across both pillars" },
             { icon: Clock, value: 24, suffix: "h", label: "Tailored quotation turnaround" },
             { icon: ShieldCheck, value: 100, suffix: "%", label: "Focused on ZIMRA compliance" },
           ].map((s) => (

@@ -1,10 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronDown, Calculator, Code2 } from "lucide-react";
+import { ChevronDown, Calculator, Code2, Users } from "lucide-react";
 import ServiceCard from "./ServiceCard";
 import Reveal from "./Reveal";
-import { pillars, type Pillar } from "@/lib/data";
+import {
+  pillars,
+  tierMeta,
+  tierOrder,
+  type Pillar,
+  type Tier,
+} from "@/lib/data";
 
 const INITIAL = 6;
 
@@ -17,6 +23,7 @@ const TABS: { id: TabId; label: string; icon: typeof Calculator }[] = [
 
 export default function ServicesExplorer() {
   const [active, setActive] = useState<TabId>("finance");
+  const [tier, setTier] = useState<Tier>("bronze");
   const [expanded, setExpanded] = useState(false);
 
   // Support deep links like /services#it from the nav/footer.
@@ -41,7 +48,7 @@ export default function ServicesExplorer() {
 
   return (
     <div id={active}>
-      {/* Tabs */}
+      {/* Pillar tabs */}
       <div
         role="tablist"
         aria-label="Service pillars"
@@ -71,6 +78,42 @@ export default function ServicesExplorer() {
             </button>
           );
         })}
+      </div>
+
+      {/* Tier toggle */}
+      <div className="mt-6 flex flex-col items-center gap-3">
+        <div
+          role="group"
+          aria-label="Pricing tier by business size"
+          className="inline-flex gap-1 rounded-full bg-slate-100 p-1"
+        >
+          {tierOrder.map((t) => {
+            const selected = tier === t;
+            return (
+              <button
+                key={t}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => setTier(t)}
+                className={`rounded-full px-4 py-2 text-xs font-semibold transition-all duration-200 sm:text-sm ${
+                  selected
+                    ? "bg-white text-slate-900 shadow-soft"
+                    : "text-slate-500 hover:text-slate-800"
+                }`}
+              >
+                {tierMeta[t].name}
+              </button>
+            );
+          })}
+        </div>
+        <p className="inline-flex items-center gap-1.5 text-xs text-slate-500">
+          <Users className="h-3.5 w-3.5" />
+          <span className="font-semibold text-slate-700">
+            {tierMeta[tier].size}
+          </span>
+          <span aria-hidden>·</span>
+          {tierMeta[tier].profile}
+        </p>
       </div>
 
       {/* Active pillar header */}
@@ -103,7 +146,12 @@ export default function ServicesExplorer() {
             delay={(i % 3) * 70}
             direction={i >= INITIAL ? "up" : "zoom"}
           >
-            <ServiceCard service={s} accent={accent} />
+            <ServiceCard
+              service={s}
+              accent={accent}
+              tier={tier}
+              priceLabel={tierMeta[tier].name}
+            />
           </Reveal>
         ))}
       </div>
