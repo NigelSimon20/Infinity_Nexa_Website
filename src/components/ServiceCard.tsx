@@ -56,7 +56,7 @@ const iconMap: Record<string, LucideIcon> = {
   "ZIMRA ITF12B Annual": Landmark,
   "ZIMRA Objections": Scale,
   "ZIMRA Tax Health Check": ShieldCheck,
-  "TARNS Assistance": ClipboardCheck,
+  "TARMS Assistance": ClipboardCheck,
   "Sage Pastel Setup": Calculator,
   "Sage X3 Guidance": Settings2,
   "Tender Writing": FileCheck,
