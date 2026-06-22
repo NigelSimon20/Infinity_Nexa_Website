@@ -23,6 +23,8 @@ export default function Counter({ value, suffix = "", duration = 1400 }: Counter
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
     if (reduce) {
+      // Respect reduced motion: show the final value without animating.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplay(value);
       return;
     }

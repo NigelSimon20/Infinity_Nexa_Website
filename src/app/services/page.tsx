@@ -4,9 +4,16 @@ import PageHero from "@/components/PageHero";
 import ServicesExplorer from "@/components/ServicesExplorer";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Services & Pricing",
   description:
-    "Full catalogue of Infinity Nexa services across two pillars: Finance, Accounting & ZIMRA Compliance and IT, Web & Digital Services — with transparent USD pricing.",
+    "Full catalogue of Infinity Nexa services across two pillars: Finance, Accounting & ZIMRA Compliance and IT, Web & Digital Services — with transparent Bronze, Silver and Premium USD pricing.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Services & Pricing | Infinity Nexa",
+    description:
+      "40+ accounting, ZIMRA compliance and IT services with transparent tiered USD pricing for Zimbabwean businesses.",
+    url: "/services",
+  },
 };
 
 export default function ServicesPage() {

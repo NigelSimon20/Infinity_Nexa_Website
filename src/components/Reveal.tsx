@@ -36,6 +36,8 @@ export default function Reveal({
     if (!el) return;
 
     if (typeof IntersectionObserver === "undefined") {
+      // No IO support: reveal immediately so content is never hidden.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShown(true);
       return;
     }

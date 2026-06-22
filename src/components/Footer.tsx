@@ -1,8 +1,14 @@
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
-import { Facebook, Instagram, Linkedin, WhatsApp } from "./SocialIcons";
+import { Facebook, Instagram, Linkedin } from "./SocialIcons";
 import Logo from "./Logo";
-import { company, nav, pillars } from "@/lib/data";
+import { company, nav, pillars, socials } from "@/lib/data";
+
+const SOCIAL_ICONS = {
+  LinkedIn: Linkedin,
+  Facebook,
+  Instagram,
+} as const;
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -17,21 +23,21 @@ export default function Footer() {
               {company.intro}
             </p>
             <div className="flex gap-3 pt-1">
-              {[
-                { Icon: Facebook, label: "Facebook" },
-                { Icon: Instagram, label: "Instagram" },
-                { Icon: Linkedin, label: "LinkedIn" },
-                { Icon: WhatsApp, label: "WhatsApp" },
-              ].map(({ Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-300 transition hover:bg-brand-500 hover:text-white"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
+              {socials.map(({ label, href }) => {
+                const Icon = SOCIAL_ICONS[label as keyof typeof SOCIAL_ICONS];
+                return (
+                  <Link
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${company.name} on ${label}`}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-300 transition hover:bg-brand-500 hover:text-white"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -84,12 +90,12 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-sky" />
-                <a
+                <Link
                   href={`mailto:${company.email}`}
                   className="text-slate-400 transition hover:text-white"
                 >
                   {company.email}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

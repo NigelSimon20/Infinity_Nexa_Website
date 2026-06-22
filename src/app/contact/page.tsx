@@ -10,6 +10,13 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with Infinity Nexa in Harare, Zimbabwe. Free 30-minute consultation and a tailored quotation within 24 hours.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact | Infinity Nexa",
+    description:
+      "Talk to Infinity Nexa in Harare. Free 30-minute consultation, tailored quote within 24 hours.",
+    url: "/contact",
+  },
 };
 
 const details = [

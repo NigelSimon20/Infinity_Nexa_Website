@@ -1,5 +1,5 @@
 @import "tailwindcss";
-/* Chillax (display font) is loaded via a <link> in layout.tsx */
+/* Chillax (display) is self-hosted via next/font/local in layout.tsx */
 
 /* ============================================================
    Infinity Nexa — Design Tokens
@@ -10,8 +10,8 @@
 @theme {
   --font-sans: "Avenir Next", "Avenir", var(--font-fallback), system-ui,
     -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Chillax", var(--font-fallback), ui-sans-serif, system-ui,
-    sans-serif;
+  --font-display: var(--font-chillax), var(--font-fallback), ui-sans-serif,
+    system-ui, sans-serif;
 
   /* Brand palette */
   --color-ink: #0a1733;

@@ -16,6 +16,7 @@ import Reveal from "@/components/Reveal";
 import Counter from "@/components/Counter";
 import ServiceCard from "@/components/ServiceCard";
 import FaqAccordion from "@/components/FaqAccordion";
+import JsonLd from "@/components/JsonLd";
 import {
   company,
   pillars,
@@ -24,6 +25,16 @@ import {
   process,
   faqs,
 } from "@/lib/data";
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
 
 const industries = [
   "SMEs",
@@ -42,6 +53,7 @@ const featuredIT = pillars[1].services.slice(0, 3);
 export default function Home() {
   return (
     <>
+      <JsonLd data={faqJsonLd} />
       {/* ===================== HERO ===================== */}
       <section className="relative overflow-hidden bg-ink text-white">
         <div className="hero-grid absolute inset-0" />

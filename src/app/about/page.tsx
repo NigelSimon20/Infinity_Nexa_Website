@@ -8,7 +8,7 @@ import {
   Mail,
 } from "lucide-react";
 import { Linkedin } from "@/components/SocialIcons";
-import { Section, SectionHeading, Button, Eyebrow } from "@/components/ui";
+import { Section, SectionHeading, Button } from "@/components/ui";
 import Reveal from "@/components/Reveal";
 import Counter from "@/components/Counter";
 import PageHero from "@/components/PageHero";
@@ -18,6 +18,13 @@ export const metadata: Metadata = {
   title: "About & Team",
   description:
     "Meet Infinity Nexa — a dual-service firm combining accounting & ZIMRA compliance with IT solutions, led by six expert directors in Harare, Zimbabwe.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About & Team | Infinity Nexa",
+    description:
+      "A dual-service firm where finance and technology work as one — six directors serving businesses across Zimbabwe.",
+    url: "/about",
+  },
 };
 
 function initials(name: string) {

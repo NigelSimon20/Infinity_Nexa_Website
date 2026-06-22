@@ -24,6 +24,15 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ];
 
+export const socials = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/infinitynexa/" },
+  { label: "Facebook", href: "https://www.facebook.com/share/1FKN4M6HVR/?mibextid=wwXIfr" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/infinitynexa?igsh=MWhzOXdwdG1qZDl4cg%3D%3D&utm_source=qr",
+  },
+];
+
 export const stats = [
   { value: 6, suffix: "", label: "Expert Directors" },
   { value: 40, suffix: "+", label: "Services Offered" },

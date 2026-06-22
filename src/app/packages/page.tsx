@@ -11,6 +11,13 @@ export const metadata: Metadata = {
   title: "Retainer Packages",
   description:
     "Affordable monthly retainer packages bundling ZIMRA compliance, bookkeeping, payroll, website maintenance and design — from $55/mo, tiered by company size.",
+  alternates: { canonical: "/packages" },
+  openGraph: {
+    title: "Retainer Packages | Infinity Nexa",
+    description:
+      "Fixed monthly retainers for finance + IT, matched to your company size. From $55/mo.",
+    url: "/packages",
+  },
 };
 
 const methodIcons = [Banknote, Smartphone, CreditCard];

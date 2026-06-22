@@ -29,6 +29,8 @@ export default function ServicesExplorer() {
   // Support deep links like /services#it from the nav/footer.
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#it") {
+      // Hash is only known on the client, so this must run in an effect.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActive("it");
     }
   }, []);
