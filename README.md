@@ -37,9 +37,13 @@ npm run start    # serve the production build
    `<Image src="/logo.png" alt="Infinity Nexa" width={140} height={40} />`.
 2. **WhatsApp number** — `company.whatsapp` in `src/lib/data.ts` (currently a placeholder).
 3. **Social media links** — the `href="#"` links in `src/components/Footer.tsx`.
-4. **Contact form backend** — the form in `src/components/ContactForm.tsx` currently
-   opens the visitor's email client (mailto). For real form submissions, wire it to a
-   service like Formspree, Resend, or a Next.js API route (see the comment in that file).
+4. **Contact form (Resend)** — the form POSTs to `/api/contact`
+   (`src/app/api/contact/route.ts`), which emails you via [Resend](https://resend.com).
+   Copy `.env.example` to `.env.local`, add your `RESEND_API_KEY`, and set the same
+   vars in your host for production. Verify your domain in Resend, then switch
+   `CONTACT_FROM_EMAIL` to a `@infinitynexa.co.zw` address. Until configured, the
+   endpoint returns a graceful "not configured" message. Includes a honeypot to
+   block spam bots; the visitor's email is set as `reply-to` so you can reply directly.
 5. **Equity percentages** were intentionally **left off** the public site — they're
    internal info. The team is shown by role/pillar only.
 

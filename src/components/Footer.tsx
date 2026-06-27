@@ -1,14 +1,21 @@
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
-import { Facebook, Instagram, Linkedin } from "./SocialIcons";
+import { Facebook, Instagram, Linkedin, WhatsApp } from "./SocialIcons";
 import Logo from "./Logo";
-import { company, nav, pillars, socials } from "@/lib/data";
+import { company, nav, pillars, socials, whatsappNumbers } from "@/lib/data";
 
 const SOCIAL_ICONS = {
   LinkedIn: Linkedin,
   Facebook,
   Instagram,
+  WhatsApp,
 } as const;
+
+// Round social-icon row: profiles + a WhatsApp shortcut to the first number.
+const socialIconLinks = [
+  ...socials,
+  { label: "WhatsApp", href: whatsappNumbers[0].link },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -23,7 +30,7 @@ export default function Footer() {
               {company.intro}
             </p>
             <div className="flex gap-3 pt-1">
-              {socials.map(({ label, href }) => {
+              {socialIconLinks.map(({ label, href }) => {
                 const Icon = SOCIAL_ICONS[label as keyof typeof SOCIAL_ICONS];
                 return (
                   <Link
@@ -96,6 +103,22 @@ export default function Footer() {
                 >
                   {company.email}
                 </Link>
+              </li>
+              <li className="flex items-start gap-3">
+                <WhatsApp className="mt-0.5 h-4 w-4 shrink-0 text-sky" />
+                <span className="flex flex-col gap-1">
+                  {whatsappNumbers.map((w) => (
+                    <Link
+                      key={w.link}
+                      href={w.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-400 transition hover:text-white"
+                    >
+                      {w.display}
+                    </Link>
+                  ))}
+                </span>
               </li>
             </ul>
           </div>

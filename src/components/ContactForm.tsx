@@ -45,20 +45,22 @@ export default function ContactForm() {
 
     setStatus("submitting");
 
-    // No backend yet: build a mailto so the message is never lost, then
-    // show success. Replace this block with a POST to your API/Formspree.
     try {
-      const subject = encodeURIComponent(
-        `Website enquiry — ${String(data.get("service") || "General")}`,
-      );
-      const body = encodeURIComponent(
-        `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nPhone: ${
-          data.get("phone") || "—"
-        }\nService: ${data.get("service")}\n\n${data.get("message")}`,
-      );
-      // Open the user's mail client as a reliable fallback.
-      window.location.href = `mailto:${company.email}?subject=${subject}&body=${body}`;
-      await new Promise((r) => setTimeout(r, 600));
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          service: data.get("service"),
+          message: data.get("message"),
+          company: data.get("company"), // honeypot
+        }),
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
       setStatus("success");
       form.reset();
     } catch {
@@ -75,11 +77,11 @@ export default function ContactForm() {
       >
         <CheckCircle2 className="h-14 w-14 text-emerald-600" />
         <h3 className="mt-4 font-display text-xl font-bold text-slate-900">
-          Thank you — message ready to send!
+          Thank you — your message is on its way!
         </h3>
         <p className="mt-2 max-w-sm text-sm text-slate-600">
-          Your email client should have opened with your enquiry. We respond
-          with a tailored quotation within 24 hours.
+          We&apos;ve received your enquiry and will respond with a tailored
+          quotation within 24 hours.
         </p>
         <button
           type="button"
@@ -103,6 +105,18 @@ export default function ContactForm() {
       noValidate
       className="rounded-3xl border border-slate-200 bg-white p-6 shadow-card sm:p-8"
     >
+      {/* Honeypot — hidden from people, tempting to bots */}
+      <div className="absolute left-[-9999px]" aria-hidden="true">
+        <label htmlFor="company">Company (leave blank)</label>
+        <input
+          id="company"
+          name="company"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelCls}>

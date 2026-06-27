@@ -11,10 +11,14 @@ export const company = {
   location: "Harare, Zimbabwe",
   email: "info@infinitynexa.co.zw",
   website: "www.infinitynexa.co.zw",
-  whatsapp: "+263 78 000 0000", // placeholder — update with real number
   intro:
     "A dual-service professional firm combining accounting & ZIMRA compliance with IT solutions. Serving SMEs, corporates, start-ups, and individuals across Zimbabwe.",
 };
+
+export const whatsappNumbers = [
+  { display: "+263 78 916 6011", link: "https://wa.me/263789166011" },
+  { display: "+263 78 038 8451", link: "https://wa.me/263780388451" },
+];
 
 export const nav = [
   { label: "Home", href: "/" },
