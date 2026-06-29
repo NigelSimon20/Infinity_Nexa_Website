@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import { company, socials } from "@/lib/data";
+import { Analytics } from "@vercel/analytics/next"
 
 /* Avenir Next is a macOS system font; this loads a close web fallback
    (Nunito Sans) for visitors who don't have Avenir Next installed. */
@@ -142,6 +143,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <Analytics/>
         <Header />
         <main id="main" className="flex-1">
           {children}
